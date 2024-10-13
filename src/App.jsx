@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PostComponent, ProfileComponent } from './post';
+import { PostComponent } from './post';
 
 function App() {
   // const [count, setCount] = useState(0)
