@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PostComponent } from './post';
+import { NotificationBell } from './bell';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -26,7 +27,10 @@ function App() {
 
   //setIsVisible updates the state
   return <div style={{ background: "#dfe6e9", height: "100vh", }}>
-    <button onClick={addPost}>Add post</button>
+    <div style ={{display: "flex"}}>
+    <button onClick={addPost}>Add post</button> 
+    <NotificationBell />
+    </div>
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div>
         {postComponent}
