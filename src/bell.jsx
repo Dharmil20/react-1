@@ -1,41 +1,41 @@
 import React, { useEffect, useState } from 'react';
 
 export function NotificationBell() {
-    const [notiCount, setNotiCount] = useState(0);
+    const [notiCount, setNotiCount] = useState(100);
     const [tab, setTab] = useState(1);
     const [tabData, setTabData] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             setNotiCount(prev => prev + 1);
         }, 3000);
 
-        // return () => clearInterval(interval); // Cleanup on unmount
+        return () => clearInterval(interval); // Cleanup on unmount
     }, []);
 
-  
-    useEffect(function() {
-      setLoading(true);
-      fetch("https://jsonplaceholder.typicode.com/todos/" + tab)
-        .then(async res => {
-          const json = await res.json();
-          setTabData(json);
-          setLoading(false);
-        });
-  
+
+    useEffect(() => {
+        setLoading(true);
+        async function fetchData(){
+        const res = await fetch("https://jsonplaceholder.typicode.com/todos/" + tab)
+        const json = await res.json();
+        setTabData(json.title);
+        setLoading(false);
+        }
+        fetchData();
     }, [tab])
 
 
     return (
         <div>
             <div>
-                <button onClick={()=>setTab(1)} style={{color: (tab == 1) ? "red" : "black"}}>Todo 1</button>
-                <button onClick={()=>setTab(2)} style={{color: (tab == 2) ? "red" : "black"}}>Todo 2</button>
-                <button onClick={()=>setTab(3)} style={{color: (tab == 3) ? "red" : "black"}}>Todo 3</button>
-                <button onClick={()=>setTab(4)} style={{color: (tab == 4) ? "red" : "black"}}>Todo 4</button>
+                <button onClick={() => setTab(1)} style={{ color: (tab == 1) ? "red" : "black" }}>Todo 1</button>
+                <button onClick={() => setTab(2)} style={{ color: (tab == 2) ? "red" : "black" }}>Todo 2</button>
+                <button onClick={() => setTab(3)} style={{ color: (tab == 3) ? "red" : "black" }}>Todo 3</button>
+                <button onClick={() => setTab(4)} style={{ color: (tab == 4) ? "red" : "black" }}>Todo 4</button>
             </div>
-            {loading ? "Loading....." : tabData.title}
+            {loading ? "Loading....." : tabData}
             <div
                 style={{
                     backgroundColor: "red",
