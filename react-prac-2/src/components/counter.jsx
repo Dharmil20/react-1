@@ -1,25 +1,29 @@
 import { useState } from 'react'
 
-function Counter(){
+function Counter() {
     const [count, setCount] = useState(0);
 
-    function handleIncrease(){
+    function handleIncrease() {
         setCount(count + 1);
     }
-    function handleDecrese(){
-        setCount(count - 1);
+    function handleDecrese() {
+        if (count <= 0) {
+            setCount(0);
+        } else {
+            setCount(count - 1);
+        }
     }
-    function handleReset(){
+    function handleReset() {
         setCount(0);
     }
 
 
-    return(
+    return (
         <>
-        <h1>Count {count}</h1>
-        <button onClick={handleIncrease}>Increse</button>
-        <button onClick={handleDecrese}>Decrese</button>
-        <button onClick={handleReset}>Reset</button>
+            <h1>Count {count}</h1>
+            <button onClick={handleIncrease}>Increse</button>
+            <button onClick={handleDecrese}>Decrese</button>
+            <button onClick={handleReset}>Reset</button>
         </>
     );
 }
