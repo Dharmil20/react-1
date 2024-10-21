@@ -1,34 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import { useState } from 'react'
+import { BrowserRouter, Routes, Route, Link, useNavigate, Outlet } from "react-router-dom"
 import './App.css'
+import { Class11Program } from "./components/class11program"
+import { useEffect } from "react"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />} >
+            <Route path="/neet/online-coaching-class-11" element={<Class11Program />} />
+            <Route path="/neet/online-coaching-class-12" element={<Class12Program />} />
+          </Route>
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  )
+}
+
+function Layout() {
+  return (<div>
+    <Link to="/">Allen</Link> | <Link to="/neet/online-coaching-class-11">Class 11</Link> | <Link to="/neet/online-coaching-class-12">Class 12</Link> <br />
+    <br />Welcome to Allen
+    <Outlet /> {/*Jaha pe bhi Maine Outlet likha hai waha pe children routes ke content display hoonge*/}
+    <br /><br />Footer | About Us | Contact Us
+  </div>)
+}
+
+function Class12Program() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setInterval(() => {
+      navigate("/")
+    }, 5 * 1000)
+  })
+
+  return (<div>
+    NEET programs for Class 12th
+  </div>)
+}
+
+function ErrorPage() {
+
+  return (
+    <div>
+      Error 404! <br />Page Not Found!
+    </div>
   )
 }
 
