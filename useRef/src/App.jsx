@@ -1,11 +1,18 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const inputRef = useRef()
 
+  const handleFocus = () => {
+    inputRef.focus();
+  }
   return (
     <>
+      Sign Up
+      <input ref={inputRef} type="text" />
+      <input type="text" />
+      <button onClick={handleFocus}>Submit</button>
     </>
   )
 }
