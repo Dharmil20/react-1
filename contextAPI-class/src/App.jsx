@@ -1,17 +1,25 @@
-import { useState } from 'react'
+import { useState, createContext, useContext } from 'react';
 import './App.css'
-import { createContext } from 'react';
-import { useContext } from 'react';
+
 
 const BulbContext = createContext(); //Step 1: Create Context
 
-function App() {
+function BulbProvider({ children }) {
   const [bulb, setBulb] = useState(true);
+
+  return (
+    <BulbContext.Provider value={{ bulb, setBulb }}> {/*Step 2: Provide Context to Parent component */}
+      {children}
+    </BulbContext.Provider>
+  )
+}
+
+function App() {
   return (
     <>
-      <BulbContext.Provider value={{ bulb, setBulb }}> {/*Step 2: Provide Context to Parent component */}
+      <BulbProvider> {/*Step 2: Provide Context to Parent component */}
         <LightBulb />
-      </BulbContext.Provider>
+      </BulbProvider>
     </>
   )
 }
@@ -19,7 +27,7 @@ function App() {
 function LightBulb() {
 
   return (<>
-    <Bulb/> <br />
+    <Bulb /> <br />
     <ToggleBulb />
   </>)
 }
